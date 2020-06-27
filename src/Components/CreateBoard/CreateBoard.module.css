@@ -1,0 +1,52 @@
+
+.header {
+    color: #4A4E69;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 5vw;
+    
+}
+
+.header h1 {
+    padding-left: 0;
+}
+
+.form {
+    margin-left: 5vw;
+}
+
+.form div {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin-top: 1em;
+}
+.form div label {
+    margin-bottom: .3em;
+}
+.form div input {
+    padding-left: .5em;
+    height: 1.6em;
+    border: 1px inset #ecd7c9;
+    border-radius: 2px;
+}
+
+.createBtn {
+    margin-top: 1em;
+}
+
+.createBtn button {
+    width: 70px;
+    align-self: center;
+    color: #ffffff;
+    background: #4a4e69;
+    font-weight: 700;
+    border: 2px outset #f9d5c1;
+    cursor: pointer;
+    padding: .5em;
+    border-radius: 2px;
+}
+
+.warning {
+    color: red;
+}

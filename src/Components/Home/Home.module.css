@@ -1,0 +1,59 @@
+.warning {
+    margin-left: 2em;
+}
+
+.boardHeading h2 {
+    color :#4a4e69;
+    margin-left: 1rem !important;
+}
+
+.boardHeading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.refreshBtn {
+    margin-right: 1rem;
+   
+}
+
+.refreshBtn button {
+    background: #f2e9e4;
+    border: none;
+    color: #4a4e69;
+    cursor: pointer;
+}
+
+.boardCard {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 1px solid #ead0c1;
+    border-radius: 5px;
+    box-shadow: 4px 4px 12px 1px #c1aaaa;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: transform .2s;
+}
+.boardCard:hover {
+    transform : scale(1.1);
+}
+
+.boardCard h2 {
+    color: #4a4e69;
+}
+
+.boardsContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}

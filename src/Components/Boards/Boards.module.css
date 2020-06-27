@@ -1,0 +1,41 @@
+.column, .columnAdd{
+    width: 250px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+.column {
+    border: 1px solid #e8cebf;
+    height: 400px;
+}
+.columnAdd {
+    border: 1px dashed #e8cebf;
+    height: 200px;
+}
+.columnAdd:hover {
+    box-shadow: 1px 1px 12px 4px #b7b1ae;
+}
+
+.columnContainer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.boardName h1 {
+    margin-left: 1rem;
+    padding: 0;
+    margin-top: 1rem;
+    color: #4A4E69;
+}
+
+.addColumn {
+    display: contents ;
+    
+}
+

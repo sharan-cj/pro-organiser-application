@@ -1,0 +1,35 @@
+.navBar {
+    background: #4A4E69 ;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+
+
+h1 {
+    margin: 0;
+    width: 40%;
+    padding-left: 1rem;
+}
+
+ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-width: 20%;
+    max-width: 30%;
+    list-style: none;
+}
+a {
+    color: #fff;
+    text-decoration: none;
+    padding: 1em;
+}
+
+.highlight {
+    background: #5b607b;
+}
