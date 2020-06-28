@@ -29,7 +29,7 @@ export default function AddColumn(props) {
 
   useEffect(() => {
     addColumnInputRef.current.focus();
-    console.log(props)
+
   }, []);
 
   async function postData() {
