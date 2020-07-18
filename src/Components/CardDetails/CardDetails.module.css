@@ -1,0 +1,102 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.backdrop {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    background: black;
+    opacity: .5;
+    width: 100%;
+    height: 100%;
+}
+
+.cardDetailsModal {
+    background: #fff;
+    z-index: 200;
+    opacity: 1;
+    position: absolute;
+    top:25%;
+    color: #795548;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #4A4E69;
+    border-radius: 5px;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+
+.taskTitle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.taskTitle h2 {
+    margin: 1rem;
+    color: #4A4E69;
+}
+
+.taskTitle button {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+.taskTitle button i:hover {
+    transform: scale(1.2);
+}
+
+.taskTitle button i {
+    margin: .5rem;
+}
+
+.description {
+    margin:  0 1rem;
+   
+}
+.description h3 {
+    margin: 0;
+    color: #4A4E69;
+}
+
+.team {
+    margin:  0 1rem;
+}
+
+.team h3 {
+    margin: 0;
+    color: #4A4E69;
+}
+
+.dueDate {
+    margin:  0 1rem;
+    margin-bottom: 1rem;
+}
+
+.dueDate h3 {
+    margin: 0;
+    color: #4A4E69;
+}
+
+.members div{
+    text-transform: capitalize;
+    font-weight: 600;
+    margin-left: 1rem;
+}
+
+span {
+    font-weight: 600;
+    margin-left: 1rem;
+}

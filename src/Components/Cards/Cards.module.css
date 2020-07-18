@@ -1,0 +1,65 @@
+.card {
+    background: #efdfd6;
+    margin: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid #f2e9e4;
+    border-radius: 5px;
+    box-shadow: 3px 4px 9px 1px #bfb5b5;
+    cursor: pointer;
+
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.userInitial {
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: larger;
+    background: #2196F3;
+    width: 20px;
+    height: 20px;
+    padding: .2rem;
+    border: 1px outset #9E9E9E;
+    border-radius: 50%;
+    text-align: center;
+    margin: 0;
+    font-family: monospace;
+    color: white;
+    
+}
+
+.cardTitle {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: large;
+    font-weight: 600;
+    color: #795548;
+
+}
+
+.listIcon{
+    margin-left: 1rem;
+    margin-right: 2rem;
+    color: #795548;
+    font-size: x-large;
+    padding-top: .2em;
+    width: 40%;
+    text-align: left;
+}
+
+.userInitialsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 1rem;
+    align-items: center;
+}
+
+.button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: #efe2da;
+}

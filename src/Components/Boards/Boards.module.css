@@ -1,9 +1,9 @@
 
 .column {
     border: 1px solid #4A4E69;
-    height: 400px;
+    /* height: 400px; */
     align-items: flex-start;
-    width: 250px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     margin-left: 1rem;
@@ -134,5 +134,11 @@
     height: 35px;
     border-style: dashed;
     border-radius: 6px;
+    cursor: pointer;
 
+}
+
+.notFound {
+    margin-left:1rem;
+    margin-top:.5rem;
 }

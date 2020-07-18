@@ -42,7 +42,9 @@ export default function CreateBoard() {
     if (event.target.id === "name") {
       setBoardName(event.target.value);
     } else if (event.target.id === "team") {
-      setTeamMembers(event.target.value);
+      const value= event.target.value;
+      const teamMembers = value.split(',');
+      setTeamMembers(teamMembers);
     } else if (event.target.id === "type") {
       setBoardType(event.target.value);
     }

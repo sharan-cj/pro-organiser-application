@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Boards.module.css";
 import AddColumn from "../AddColumn/AddColumn";
-import {Redirect} from 'react-router-dom';
+import { Redirect } from "react-router-dom";
+import AddCard from "../AddCard/AddCard";
+import Cards from "../Cards/Cards";
 
 export default function Boards(props) {
   const boardID = props.match.params.board;
   const url = `https://pro-org.firebaseio.com/${boardID}.json`;
 
   const [boardData, setBoardData] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [selectedColumn, setSelectedColumn] =  useState('')
+  const [showColumnModal, setShowColumnModal] = useState(false);
+  const [showCardModal, setShowCardModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
   const columnRef = React.useRef();
@@ -22,12 +26,18 @@ export default function Boards(props) {
     await axios.get(url).then((response) => setBoardData(response.data));
   }
 
-  const addColumn = (event) => {
+  const addColumnHandler = (event) => {
     event.preventDefault();
-    setShowModal(true);
+    setShowColumnModal(true);
   };
 
-  const deleteBoardHandler =(event) => {
+  const addCardHandler = (event) => {
+    event.preventDefault();
+    setSelectedColumn (event.currentTarget.parentNode.id); 
+    setShowCardModal(true);
+  };
+
+  const deleteBoardHandler = (event) => {
     event.preventDefault();
     deleteBoard();
   };
@@ -35,7 +45,7 @@ export default function Boards(props) {
   const deleteColumnHandler = (event) => {
     event.preventDefault();
     let columnID = event.currentTarget.id;
-    console.log(event.currentTarget.id,'columnID');
+    console.log(event.currentTarget.id, "columnID");
     deleteColumn(columnID);
   };
 
@@ -50,15 +60,16 @@ export default function Boards(props) {
   }
 
   async function deleteBoard() {
-       axios.delete(url)
-       .then (setRedirect(true))
+    axios.delete(url).then(setRedirect(true));
   }
 
   return (
     <>
       <div className={styles.boardName}>
         <h1>{boardData.boardName} Board</h1>
-        <button onClick={deleteBoardHandler}><i className="fa fa-trash fa-3x" aria-hidden="true"></i></button>
+        <button onClick={deleteBoardHandler}>
+          <i className="fa fa-trash fa-3x" aria-hidden="true"></i>
+        </button>
       </div>
       <div className={styles.columnContainer}>
         {typeof boardData.columns === "undefined" ? (
@@ -66,7 +77,7 @@ export default function Boards(props) {
         ) : (
           Object.keys(boardData.columns).map((column) => {
             return (
-              <div className={styles.column} key={column} >
+              <div className={styles.column} key={column}>
                 <div className={styles.columnName}>
                   <h3>{boardData.columns[column].columnName}</h3>
                   <button
@@ -80,29 +91,44 @@ export default function Boards(props) {
                 </div>
                 <hr className={styles.hr} />
                 <div className={styles.cardsContainer}>
-                    <div className={styles.addCard}> 
-                    <button id='CreateCard'>Add a card</button>
-                    </div>
+                  
+                    { boardData.columns[column].cards ? 
+                      Object.keys(boardData.columns[column].cards).map(card =>{
+                        return (
+                          <Cards key={card} cardID ={card} boardID={boardID} columnID={column} />
+                        )
+                      }) : <div className={styles.notFound}>No cards found.</div>
+                    }
+                    
+                  
+                  <div className={styles.addCard} id={column}>
+                    <button id="CreateCard" onClick={addCardHandler}>
+                      Add a card
+                    </button>
+                  </div>
                 </div>
               </div>
             );
           })
         )}
 
-        <button className={styles.addColumn} onClick={addColumn}>
+        <button className={styles.addColumn} onClick={addColumnHandler}>
           <div className={styles.columnAdd}>Add a column</div>
         </button>
       </div>
-      {showModal ? (
+
+      {showColumnModal ? (
         <AddColumn
           exit={() => {
-            setShowModal(false);
+            setShowColumnModal(false);
           }}
           boardID={boardID}
         />
       ) : null}
 
-      {redirect ? <Redirect to='/' exact /> :null}
+      {showCardModal ? <AddCard boardID ={boardID} columnID ={selectedColumn} exit={()=>{setShowCardModal(false)}}/> : null}
+
+      {redirect ? <Redirect to="/" exact /> : null}
     </>
   );
 }
