@@ -23,7 +23,8 @@ export default function Boards(props) {
   }, []);
 
   async function getData() {
-    await axios.get(url).then((response) => setBoardData(response.data));
+    const { data } = await axios.get(url);
+    setBoardData(data);
   }
 
   const addColumnHandler = (event) => {

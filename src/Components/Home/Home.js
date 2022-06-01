@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [noBoards]);
 
   async function getData() {
     const { data } = await axios.get(dataBaseUrl);
@@ -19,6 +19,7 @@ export default function Home() {
       return;
     }
     setBoards(data);
+    setNoBoards("has");
   }
 
   const refresh = (event) => {
