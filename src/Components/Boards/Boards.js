@@ -2,25 +2,25 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Boards.module.css";
 import AddColumn from "../AddColumn/AddColumn";
-import { Redirect } from "react-router-dom";
 import AddCard from "../AddCard/AddCard";
 import Cards from "../Cards/Cards";
-
+import { useHistory } from "react-router-dom";
 export default function Boards(props) {
   const boardID = props.match.params.board;
   const url = `https://pro-org.firebaseio.com/${boardID}.json`;
 
   const [boardData, setBoardData] = useState("");
-  const [selectedColumn, setSelectedColumn] =  useState('')
+  const [selectedColumn, setSelectedColumn] = useState("");
   const [showColumnModal, setShowColumnModal] = useState(false);
   const [showCardModal, setShowCardModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const navigate = useHistory();
 
   const columnRef = React.useRef();
 
   useEffect(() => {
     getData();
-  });
+  }, []);
 
   async function getData() {
     await axios.get(url).then((response) => setBoardData(response.data));
@@ -33,7 +33,7 @@ export default function Boards(props) {
 
   const addCardHandler = (event) => {
     event.preventDefault();
-    setSelectedColumn (event.currentTarget.parentNode.id); 
+    setSelectedColumn(event.currentTarget.parentNode.id);
     setShowCardModal(true);
   };
 
@@ -60,7 +60,8 @@ export default function Boards(props) {
   }
 
   async function deleteBoard() {
-    axios.delete(url).then(setRedirect(true));
+    await axios.delete(url);
+    setRedirect(true);
   }
 
   return (
@@ -91,16 +92,21 @@ export default function Boards(props) {
                 </div>
                 <hr className={styles.hr} />
                 <div className={styles.cardsContainer}>
-                  
-                    { boardData.columns[column].cards ? 
-                      Object.keys(boardData.columns[column].cards).map(card =>{
-                        return (
-                          <Cards key={card} cardID ={card} boardID={boardID} columnID={column} />
-                        )
-                      }) : <div className={styles.notFound}>No cards found.</div>
-                    }
-                    
-                  
+                  {boardData.columns[column].cards ? (
+                    Object.keys(boardData.columns[column].cards).map((card) => {
+                      return (
+                        <Cards
+                          key={card}
+                          cardID={card}
+                          boardID={boardID}
+                          columnID={column}
+                        />
+                      );
+                    })
+                  ) : (
+                    <div className={styles.notFound}>No cards found.</div>
+                  )}
+
                   <div className={styles.addCard} id={column}>
                     <button id="CreateCard" onClick={addCardHandler}>
                       Add a card
@@ -126,9 +132,17 @@ export default function Boards(props) {
         />
       ) : null}
 
-      {showCardModal ? <AddCard boardID ={boardID} columnID ={selectedColumn} exit={()=>{setShowCardModal(false)}}/> : null}
+      {showCardModal ? (
+        <AddCard
+          boardID={boardID}
+          columnID={selectedColumn}
+          exit={() => {
+            setShowCardModal(false);
+          }}
+        />
+      ) : null}
 
-      {redirect ? <Redirect to="/" exact /> : null}
+      {redirect ? navigate.push("/") : null}
     </>
   );
 }
