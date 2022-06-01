@@ -8,13 +8,21 @@ import {
   Route,
   Switch,
   NavLink,
+  useHistory,
 } from "react-router-dom";
 
 export default function NavBar() {
+  const history = useHistory();
   return (
     <Router>
       <div className={styles.navBar}>
-        <h1>Pro-Organizer</h1>
+        <h1
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        >
+          Pro-Organizer
+        </h1>
         <ul>
           <li>
             <NavLink exact activeClassName={styles.highlight} to="/">

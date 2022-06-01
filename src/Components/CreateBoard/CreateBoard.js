@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./CreateBoard.module.css";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function CreateBoard() {
   const dataBaseUrl = "https://pro-org.firebaseio.com/.json";
+  const navigate = useHistory();
 
   const [boardName, setBoardName] = useState("");
   const [teamMembers, setTeamMembers] = useState("");
@@ -13,16 +14,16 @@ export default function CreateBoard() {
   const [warning, setWarning] = useState(false);
 
   async function postData() {
-    await axios
-      .post(dataBaseUrl, {
+    try {
+      await axios.post(dataBaseUrl, {
         boardName,
         teamMembers,
         boardType,
         columns: "",
-      })
-      .then((response) => {
-        console.log(response);
       });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const submitHandler = (event) => {
@@ -42,8 +43,8 @@ export default function CreateBoard() {
     if (event.target.id === "name") {
       setBoardName(event.target.value);
     } else if (event.target.id === "team") {
-      const value= event.target.value;
-      const teamMembers = value.split(',');
+      const value = event.target.value;
+      const teamMembers = value.split(",");
       setTeamMembers(teamMembers);
     } else if (event.target.id === "type") {
       setBoardType(event.target.value);
@@ -101,7 +102,7 @@ export default function CreateBoard() {
           </div>
         </form>
       </div>
-      {redirect ? <Redirect to="/" exact /> : null}
+      {redirect ? navigate.push("/") : null}
     </div>
   );
 }
